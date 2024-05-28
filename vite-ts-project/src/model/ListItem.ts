@@ -9,7 +9,7 @@ export default class ListItem implements Item {
     private _item:string ;
     private _checked: boolean = false;
 
-    constructor(id: string, item: string, checked: boolean){
+    constructor(id: string, item: string, checked: boolean = false){
         this._id = id;
         this._item = item;
         this._checked = checked;
