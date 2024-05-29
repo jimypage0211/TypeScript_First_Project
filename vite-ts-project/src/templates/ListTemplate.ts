@@ -16,12 +16,11 @@
     } 
 
     public clear(): void {
-        this.ul.innerHTML = ""
+        this.ul.innerHTML = "";
     }
 
     public render(fullList: FullList): void {
         this.clear();
-        const ul = document.createElement("ul") as HTMLUListElement;
 
         fullList.list.forEach(element => {
             //Creating the li element
@@ -32,27 +31,29 @@
             input.id = element.id;
             input.type = "checkbox";
             input.checked = element.checked;
+            li.append(input)
             //Creating label element
             const label = document.createElement("label") as HTMLLabelElement;
             label.innerText = element.item;
             label.htmlFor = element.id;
+            li.append(label)
             //Creating button element
             const button = document.createElement("button") as HTMLButtonElement;
             button.className = "button";
             button.innerText = "X";
+            li.append(button)
             //Ading event for checking and unchecking each li
             input.addEventListener('change', ()=>{
                 element.checked = !element.checked;
+                fullList.save();
             })
             button.addEventListener('click', ()=>{
                 fullList.removeItem(element.id)
                 this.render(fullList);
             })
             //Apending 
-            li.append(input)
-            li.append(label)
-            li.append(button)
-            ul.append(li)
+            this.ul.append(li)
         });
+        console.log(fullList)
     }
  }
